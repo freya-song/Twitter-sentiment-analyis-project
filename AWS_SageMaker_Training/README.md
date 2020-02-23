@@ -21,15 +21,13 @@ The AWS SageMaker instance training version can only load one file each of the t
 
 ## Example
 Data srorage on AWS S3:
-
+```bash
 my-bucket
-|_training_data
-| |_data-train.json
-|
-|_validation_data
-| |_data-validation.json
-|
-|_evaluation_data
-  |_data-eval.json
-
+├── training_data
+│   └── data-train.json
+├── validation_data
+│   └── data-validation.json
+└── evaluation_data
+    └── data-eval.json
+```
 Use `python sentiment_training.py --bucket my-bucket --train training_data/data-train.json --validation validation_data/data-validation.json --eval evaluation_data/data-eval.json` to train the model.
