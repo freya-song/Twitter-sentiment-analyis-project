@@ -1,0 +1,4 @@
+#Package dependencies
+progressbar
+nltk
+pytest
