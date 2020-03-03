@@ -1,7 +1,5 @@
-# tweets-pre-processing
-This is a python library performing preprocessing for a sentiment analysis task with a CNN + Embedding model
+# tweet sentiment analysis deployment
+This is the deployment code
 
 ## Usage
-1. Use `from text_pre_processing.text_pre_processing import PreProcessor` to import the `PreProcessor` class
-
-2. The `PreProcessor` class takes one positional arg `max_length_tweet`, and a kwarg `max_length_dictionary` which has a default value of `400003`.
+Run `curl -X POST https://g440f938d2.execute-api.us-east-1.amazonaws.com/v1/predict --header "Content-Type:application/json" --data '{"tweet": "I love apple"}'`
