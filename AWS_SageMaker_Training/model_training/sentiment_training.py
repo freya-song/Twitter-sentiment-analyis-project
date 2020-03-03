@@ -24,7 +24,7 @@ def main(args):
 
     training_config["num_epoch"] = args.num_epoch
 
-    #Add args.bucket
+    #Passing args.bucket to the data extraction function as well
     train_dataset = sentiment_dataset.train_input_fn(args.bucket, args.train, training_config)
     validation_dataset = sentiment_dataset.validation_input_fn(args.bucket, args.validation, training_config)
     eval_dataset = sentiment_dataset.eval_input_fn(args.bucket, args.eval, training_config)
@@ -54,6 +54,7 @@ def get_arg_parser():
     """
 
     parser = argparse.ArgumentParser()
+    # New arg to take the S3 name
     parser.add_argument(
         "--bucket",
         type=str,

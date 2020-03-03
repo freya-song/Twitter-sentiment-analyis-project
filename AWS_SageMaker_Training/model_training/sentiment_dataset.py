@@ -71,7 +71,7 @@ def _input_fn(bucket, directory, config, mode):
 #         all_features += features
 #         all_labels += labels
     
-    #connect to my S3 bucket
+    #connect to my S3 bucket and load the file
     content_object = s3.Object(bucket, directory)
     
     all_features, all_labels = _load_json_file(content_object, config)

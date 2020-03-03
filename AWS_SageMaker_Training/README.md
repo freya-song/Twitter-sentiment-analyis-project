@@ -2,7 +2,12 @@
 This project enables user to trian a cnn model on AWS SageMaker instance, loading data from AWS S3.
 
 ## Changes from Local Training Version
-The AWS SageMaker instance training version can only load one file each of the time from S3. Relative path to the S3 bucket needs to be provided for the `--train`, `--validation`, and `--eval` args.
+The AWS SageMaker instance training version can only load one file each of the time from S3. Relative path to the S3 bucket needs to be provided for the `--train`, `--validation`, and `--eval` args, as well as the bucket name where the data stored(`--bucket`).
+
+Changes:
+1. Added `--bucket` arg to take the S3 bucket name in `sentiment_training.py`.
+2. Loaded `boto3` and several other packages in `sentiment_dataset.py` in order to communicate with S3.
+3. Changed `_input_fn` function in `sentiment_dataset.py` in order to read data from S3. 
 
 ## Usage
 1. Open a new terminal in AWS SageMaker Jupyter Notebook;
