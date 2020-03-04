@@ -1,5 +1,4 @@
-# AWS-onthecloud-Assignment4
-Assignment 4
+# twitter sentiment analysis on AWS
 
 ## Text_Pre_Pocessing_Package
 This is the pre-processing package. It enables reading files from .zip files and performs a text preprocessing functionality.
