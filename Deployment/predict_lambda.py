@@ -9,7 +9,7 @@ sage_maker_client = boto3.client("runtime.sagemaker")
 bucket_name = "chenfei-bucket"
 s3 = boto3.resource("s3")
 # Model weights
-weights = [0.25, 0.1, 0.65]
+weights = [0.1, 0.2, 0.7]
 
 def lambda_handler(event, context):
     now = datetime.now()
@@ -33,12 +33,12 @@ def lambda_handler(event, context):
         Body = json.dumps(model_payload)
         )
     cnn_10_response = sage_maker_client.invoke_endpoint(
-        EndpointName = "CNN-10",
+        EndpointName = "CNN-non-stopwords-10",
         ContentType = "application/json",
         Body = json.dumps(model_payload)
         )
     cnn_lstm_response = sage_maker_client.invoke_endpoint(
-        EndpointName = "CNN-LSTM-10",
+        EndpointName = "CnnLstm-non-stopwords-10",
         ContentType = "application/json",
         Body = json.dumps(model_payload)
         )

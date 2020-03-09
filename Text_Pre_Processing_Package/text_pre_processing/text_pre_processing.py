@@ -114,7 +114,7 @@ class PreProcessor:
         # Tokenize and eliminate size under MAX_LENGTH_TWEET
         tokens = TweetTokenizer().tokenize(text)
         # Filter stopwords
-        #tokens = [word for word in tokens if word not in self.STOPWORDS]
+        # tokens = [word for word in tokens if word not in self.STOPWORDS]
         # Eliminate size under MAX_LENGTH_TWEET
         tokens = tokens[:self.MAX_LENGTH_TWEET]
         return tokens

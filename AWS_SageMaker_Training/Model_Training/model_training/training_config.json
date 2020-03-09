@@ -1,0 +1,11 @@
+{
+    "embeddings_dictionary_size": 400002,
+    "embeddings_vector_size": 50,
+    "padding_size": 50,
+    "batch_size": 100,
+    "embeddings_path": "../glove/glove.6B.50d.txt",
+    "input_tensor_name": "embedding_input",
+    "models": [
+        "CNN"
+    ]
+}
