@@ -10,7 +10,6 @@ import json
 import math
 import tensorflow as tf
 import numpy as np
-from tensorflow.data import Dataset
 
 def train_input_fn(training_dir, config):
     return _input_fn(training_dir, config, "train")
@@ -39,13 +38,8 @@ def _load_json_file(json_path, config):
 
             entry = json.loads(line)
 
-            if len(entry["feature"]) != config["padding_size"]:
-                raise ValueError(
-                    "The size of the features of the entry with twitterid {} was not expected".format(
-                        entry["twitterid"]))
-
-            labels.append(list(map(lambda x: int(x) / 4, entry["label"])))
-            features.append(entry["feature"])
+            labels.append(int(entry["sentiment"]) / 4)
+            features.append(list(map(lambda x: int(x), entry["feature"])))
 
     return features, labels
 
@@ -66,11 +60,11 @@ def _input_fn(directory, config, mode):
     num_data_points = len(all_features)
     num_batches = math.ceil(len(all_features) / config["batch_size"])
 
-    dataset = Dataset.from_tensor_slices((all_features, all_labels))
+    dataset = tf.data.Dataset.from_tensor_slices((all_features, all_labels))
 
     if mode == "train":
 
-        dataset = Dataset.from_tensor_slices((all_features, all_labels))
+        dataset = tf.data.Dataset.from_tensor_slices((all_features, all_labels))
         dataset = dataset.batch(config["batch_size"]).shuffle(10000, seed=12345).repeat(
             config["num_epoch"])
         num_batches = math.ceil(len(all_features) / config["batch_size"])
@@ -85,3 +79,15 @@ def _input_fn(directory, config, mode):
 
     return [{config["input_tensor_name"]: dataset_features}, dataset_labels,
             {"num_data_point": num_data_points, "num_batches": num_batches}]
+
+def _load_embedding_matrix(config):
+    embedding_matrix = np.zeros((config["embeddings_dictionary_size"], config["embeddings_vector_size"]))
+    print(f"Fetching embedding vectors from {config['embeddings_path']}")
+    idx = 0
+    with open(config["embeddings_path"], "r", encoding = "utf-8") as file:
+        for line in file:
+            vector = list(map(float, line.strip().split()[1:]))
+            if vector is not None:
+                embedding_matrix[idx] = vector
+                idx += 1
+    return embedding_matrix

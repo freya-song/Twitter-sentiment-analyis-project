@@ -1,4 +1,4 @@
 #Package dependencies
-progressbar
 nltk
-pytest
+bs4
+lxml
