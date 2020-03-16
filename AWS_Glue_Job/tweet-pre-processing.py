@@ -8,7 +8,7 @@ from text_pre_processing.text_pre_processing import PreProcessor
 
 ## @params: [JOB_NAME]
 args = getResolvedOptions(sys.argv, ['JOB_NAME'])
-my_processor = PreProcessor(256)
+my_processor = PreProcessor(50, 400002)
 
 sc = SparkContext()
 glueContext = GlueContext(sc)
