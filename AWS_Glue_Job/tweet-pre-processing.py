@@ -19,7 +19,7 @@ job.init(args['JOB_NAME'], args)
 ## @args: [database = "hw4", table_name = "training", transformation_ctx = "datasource0"]
 ## @return: datasource0
 ## @inputs: []
-datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "hw4", table_name = "training", transformation_ctx = "datasource0")
+datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "raw_tweet", table_name = "training", transformation_ctx = "datasource0")
 ## @type: ApplyMapping
 ## @args: [mapping = [("col1", "string", "label", "string"), ("col2", "string", "text", "string")], transformation_ctx = "applymapping1"]
 ## @return: applymapping1
@@ -27,13 +27,13 @@ datasource0 = glueContext.create_dynamic_frame.from_catalog(database = "hw4", ta
 applymapping1 = ApplyMapping.apply(frame = datasource0, mappings = [("col1", "string", "label", "string"), ("col2", "string", "text", "string")], transformation_ctx = "applymapping1")
 
 def map_function(record):
-    label = record['label']
-    tweet = record['text']
-    #Remove the bad data point
-    if label == 'Sentiment':
-        return None
+    label = record['sentiment']
+    tweet = record['tweet']
     feature = my_processor.pre_process(tweet)
-    record['feature'] = feature
+    record = {
+        'sentiment': label,
+        'feature': feature
+    }
     return record
     
 mapping1 = Map.apply(frame = applymapping1, f = map_function, transformation_ctx = "mapping1")
