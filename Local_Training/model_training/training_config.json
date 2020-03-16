@@ -6,6 +6,8 @@
     "embeddings_path": "../glove/glove.6B.50d.txt",
     "input_tensor_name": "embedding_input",
     "models": [
-        "CNN"
+        "CNN",
+        "RNN",
+        "CnnLstm"
     ]
 }
