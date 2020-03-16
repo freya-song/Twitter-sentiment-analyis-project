@@ -81,11 +81,11 @@ class PreProcessor:
             archive_path = split[0] + ".zip"
             path_inside = split[1]
             archive = zipfile.ZipFile(archive_path, "r")
-            stopwrods = archive.read(path_inside).decode("utf8").strip().split(",")
+            stopwords = archive.read(path_inside).decode("utf8").strip().split(",")
         else:
             words = open(file_path, 'r', encoding = 'utf-8')
-            stopwrods = words.readline().strip().split(",")
-        return stopwrods
+            stopwords = words.readline().strip().split(",")
+        return stopwords
     def clean_text(self, text):
         """
         Clean the raw text to remove URLs and remove
